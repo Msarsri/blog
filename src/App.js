@@ -1,28 +1,40 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment, Suspense } from "react";
+import "./styles/main.scss";
 
-class App extends Component {
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      selectedPage: "posts"
+    };
+  }
+
+  updatePage = page => {
+    this.setState({ selectedPage: page });
+  };
+
+  getComponentToRender() {
+    const { selectedPage } = this.state;
+    return React.lazy(() => import(`./posts/${selectedPage}`));
+  }
+
   render() {
+    const Component = this.getComponentToRender();
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Fragment>
+        <center>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onClick={() => this.updatePage("postForm")}
+        >
+          Ajouter Post
+        </button>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Component updatePage={this.updatePage} />
+        </Suspense>
+        </center>
+      </Fragment>
     );
   }
 }
-
-export default App;

@@ -12,3 +12,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.post-item{
+  display: flex;
+  width: 80%;
+  margin-top: 2%;
+  text-align: -webkit-auto;
+}
+.button-container{
+  width: 29%;
+  
+}
+.button-add{
+  float: right;
+}
+.button-supp{
+  float: right;
+  margin-right: 1%;
+}
+.post-content{
+  width: 50%;
+}
+.post-message-container{
+  width: 60% !important;
+  margin-right: 1%
+}
+.comment-container{
+  width: 57%;
+  margin-left: -23%;
+}
